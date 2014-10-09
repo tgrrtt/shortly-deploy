@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
 var path = require('path');
 
-mongoose.connect('mongodb://localhost/test');
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+  mongoose.connect('mongodb://MongoLab-62:3XuhKzfZTlyEWxSaDTwTFEgah9vO0LDYw2694jV_Xbw-@ds052837.mongolab.com:52837/MongoLab-62');
+} else {
+  mongoose.connect('mongodb://localhost/test');
+}
 var db = mongoose.connection;
 
 var Schema = mongoose.Schema;
@@ -9,7 +13,7 @@ var Schema = mongoose.Schema;
 
 db.on('err', console.error.bind(console, 'database error happened'));
 db.once('open', function(){
-  console.log("Mongodb connection has been opened");
+  console.log("Mongodb connection has been opened", process.env.NODE_ENV);
 });
 
 

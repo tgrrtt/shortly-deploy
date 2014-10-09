@@ -105,7 +105,6 @@ describe('', function() {
 
       it('Returns the same shortened code if attempted to add the same URL twice', function(done) {
         var firstCode = link.code;
-        //console.log('FIRSTCODE', firstCode);
         request(app)
           .post('/links')
           .send({
@@ -113,7 +112,6 @@ describe('', function() {
           .expect(200)
           .expect(function(res) {
             var secondCode = res.body.code;
-            //console.log('SECONDCODE', secondCode);
             expect(secondCode).to.equal(firstCode);
           })
           .end(done);
