@@ -26,5 +26,10 @@ pids
 logs
 results
 
+### other
+public/dist
+*.min.*
+azure.*
+
 npm-debug.log
 node_modules

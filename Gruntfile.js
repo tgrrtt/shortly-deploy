@@ -140,6 +140,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    // run git push azure master?
   ]);
 
 
