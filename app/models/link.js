@@ -3,6 +3,12 @@ var crypto = require('crypto');
 
 var Schema = mongoose.Schema;
 
+var codify = function(url) {
+  var shasum = crypto.createHash('sha1');
+  shasum.update(url);
+  return shasum.digest('hex').slice(0, 5);
+};
+
 var urlsSchema = new Schema({
   id: Number,
   url: String,
@@ -13,10 +19,21 @@ var urlsSchema = new Schema({
   timestamp: {type: Date, default: Date.now }
 });
 
+urlsSchema.pre('save', function (next) {
+  this.code = codify(this.url);
+  // console.log('%s has been saved', this.code);
+  next();
+});
+
 var Link = mongoose.model('Link', urlsSchema);
-  // tableName: 'urls',
-  // hasTimestamps: true,
-  // defaults: {
-  //   visits: 0
 
 module.exports = Link;
+
+
+  // initialize: function(){
+  //   this.on('creating', function(model, attrs, options){
+
+  //   });
+  // }
+
+//shortly.com/X39xk

@@ -80,7 +80,7 @@ describe('', function() {
             Link.findOne({'url' : 'http://www.roflzoo.com/'})
               .exec(function(err,link){
                 if(err) console.log(err);
-                expect(link.title).to.equal('Rofl Zoo - Daily funny animal pictures');
+                expect(link.title).to.equal('Funny animal pictures, funny animals, funniest dogs');
               });
           })
           .end(done);
@@ -104,7 +104,8 @@ describe('', function() {
       });
 
       it('Returns the same shortened code if attempted to add the same URL twice', function(done) {
-        var firstCode = link.code
+        var firstCode = link.code;
+        //console.log('FIRSTCODE', firstCode);
         request(app)
           .post('/links')
           .send({
@@ -112,6 +113,7 @@ describe('', function() {
           .expect(200)
           .expect(function(res) {
             var secondCode = res.body.code;
+            //console.log('SECONDCODE', secondCode);
             expect(secondCode).to.equal(firstCode);
           })
           .end(done);

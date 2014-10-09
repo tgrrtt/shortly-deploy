@@ -18,3 +18,6 @@ var usersSchema = new Schema({
 var User = mongoose.model('Users', usersSchema);
 
 module.exports = User;
+
+
+//new Users({username:"username", password: "password"});
